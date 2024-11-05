@@ -26,12 +26,22 @@ Route::delete('/cart/remove/{rowId}',[CartController::class,'remove_cart'])->nam
 Route::delete('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
 
 
+Route::get('/checkout',[CartController::class,'checkout'])->name('cart.checkout');
+//Route::post('/place-an-order',[CartController::class,'place_an_order'])->name('cart.place.an.order');
+Route::post('/place-an-order', [CartController::class, 'place_an_order'])->name('cart.place.an.order');
+Route::get('/order-confirmation',[CartController::class,'order_confirmation'])->name('cart.order.confirmation');
+
 
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
 });
 
+Route::get('/user/account-address',[UserController::class,'address'])->name('user.address');
+Route::get('/user/address/add',[UserController::class,'add_address'])->name('user.address.add');
+Route::post('/user/address/proses',[UserController::class,'address_proses'])->name(('user.address.proses'));
+
+//Route::get('/user/provinces','[UserController::class,'add_address'])->name('provinces');
 
 Route::middleware(['auth',AuthAdmin::class])->group(function(){
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
@@ -48,6 +58,8 @@ Route::middleware(['auth',AuthAdmin::class])->group(function(){
     Route::get('/admin/products',[AdminController::class,'products'])->name('admin.products');
     Route::get('/admin/product/add',[AdminController::class,'product_add'])->name('admin.product.add');
     Route::post('/admin/product/store',[AdminController::class,'product_store'])->name('admin.product.store');
+
+    Route::get('/admin/orders',[AdminController::class,'orders'])->name('admin.orders');
 });
 
 // use App\Http\Controllers\AdminController;

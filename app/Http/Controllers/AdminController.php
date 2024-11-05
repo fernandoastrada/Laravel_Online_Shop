@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -232,5 +233,11 @@ class AdminController extends Controller
         $img->resize(104,104,function($constraint){
             $constraint->aspectRatio();
         })->save($destinationPathThumbnail.'/'.$imageName);
+    }
+
+    public function orders()
+    {
+        $orders = Order::orderby('created_at','DESC')->paginate(12);
+        return view('admin.orders',compact('orders'));
     }
 }

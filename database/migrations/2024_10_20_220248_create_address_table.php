@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('addresses', function (Blueprint $table) {
+        Schema::create('address', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->unsigned();
             $table->string('name');
@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('address');
             $table->string('city');
             $table->string('state');
-            $table->string('county');
+            $table->string('country');
             $table->string('landmark')->nullable();
             $table->string('zip');
             $table->string('type')->default('home');
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('addresses');
+        Schema::dropIfExists('address');
     }
 };

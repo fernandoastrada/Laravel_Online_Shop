@@ -1339,9 +1339,20 @@ function pureFadeOut(e) {
     window.location.href='./shop_order_complete.html';
   });
 
+  // document.querySelector('.js-show-register').addEventListener('click', function(e) {
+  //   document.querySelector(this.getAttribute("href")).click();
+  // });
   document.querySelector('.js-show-register').addEventListener('click', function(e) {
-    document.querySelector(this.getAttribute("href")).click();
-  });
+    e.preventDefault(); // Mencegah link berperilaku default
+    const href = this.getAttribute("href"); // Mendapatkan nilai href
+    const targetElement = document.querySelector(href); // Mencari elemen target berdasarkan href
+
+    if (targetElement) { // Memeriksa jika elemen target ditemukan
+        targetElement.click(); // Menjalankan click pada elemen target
+    } else {
+        console.error('Target element not found:', href);
+    }
+});
 
   $('button.js-add-wishlist, a.add-to-wishlist').off('click').on('click', function() {
     if($(this).hasClass("active"))
